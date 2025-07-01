@@ -27,7 +27,19 @@ def criar_mensagem(nome_completo, email):
     msg['Subject'] = 'Assunto do E-mail'
     msg['From'] = EMAIL_REMETENTE
     msg['To'] = email
-    msg.set_content(f'Olá {nome_completo}, este é um e-mail automático enviado via Python.')
+    html = f"""
+    <html>
+      <body>
+        <h2>Olá, {nome_completo}!</h2>
+        <p>Estamos felizes em tê-lo por aqui 😊</p>
+        <p>Visite nosso site: <a href="https://inforpiaui.app.br">InforPiauí</a></p>
+        <p style="color:gray; font-size:12px;">Este e-mail foi enviado automaticamente.</p>
+      </body>
+    </html>
+    """
+
+    # Definir corpo do e-mail com suporte a HTML
+    msg.add_alternative(html, subtype='html')
     return msg
 
 # Enviar e-mails via SMTP
